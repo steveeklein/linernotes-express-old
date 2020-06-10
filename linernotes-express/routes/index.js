@@ -75,4 +75,8 @@ router.get('/callback', async (req,res) => {
   }
 });
 
+router.get('/home', function (req, res) {
+
+});
+
 module.exports = router;
