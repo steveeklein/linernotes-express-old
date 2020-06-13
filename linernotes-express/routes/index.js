@@ -68,21 +68,22 @@ router.get('/callback', async (req, res) => {
     spotifyApi.setAccessToken(access_token);
     spotifyApi.setRefreshToken(refresh_token);
 
-    res.redirect('http://localhost:8080/home');
+    res.redirect('http://localhost:3000');
   } catch(err) {
     res.redirect('/#/error/invalid token');
   }
 });
 
-router.get('/home', async function (req, res) {
-  let topArtists = {};
+router.get('/currentlyPlayingTrack', async function (req, res) {
+  let currentlyPlayingTrack = {};
   try {
-    topArtists = await spotifyApi.getMyTopArtists(null);
+    currentlyPlayingTrack = await spotifyApi.getMyCurrentPlayingTrack(null);
         
   } catch (error) {
     console.error(new Error(error));
   }
-    res.send(topArtists);    
+  console.log(`currentlyPlayingTrack: ${JSON.stringify(currentlyPlayingTrack)}`);
+    res.send(currentlyPlayingTrack);    
 });
 
 module.exports = router;
